@@ -21,30 +21,30 @@
 
 <script>
 export default {
-  name: "Api",
+  name: 'Api',
   data() {
     return {
       apiMessage: null,
       executed: false
-    };
+    }
   },
   methods: {
     async callApi() {
-      const accessToken = await this.$auth.getTokenSilently();
+      const accessToken = await this.$auth.getTokenSilently()
 
       try {
-        const { data } = await this.$http.get("/api/external", {
+        const { data } = await this.$http.get('/api/external', {
           headers: {
             Authorization: `Bearer ${accessToken}`
           }
-        });
+        })
 
-        this.apiMessage = data;
-        this.executed = true;
+        this.apiMessage = data
+        this.executed = true
       } catch (e) {
-        this.apiMessage = `Error: the server responded with '${e.response.status}: ${e.response.statusText}'`;
+        this.apiMessage = `Error: the server responded with '${e.response.status}: ${e.response.statusText}'`
       }
     }
   }
-};
+}
 </script>

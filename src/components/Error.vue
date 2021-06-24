@@ -9,12 +9,12 @@
 
 <script>
 export default {
-  name: "Error",
+  name: 'Error',
   computed: {
     msg() {
-      return this.$auth.error;
+      return this.$auth.error
     }
   }
-};
+}
 </script>
 

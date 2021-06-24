@@ -42,8 +42,8 @@
     "vue-template-compiler": "^2.6.12"
   },
   "prettier": {
-    "singleQuote": false,
-    "semi": true
+    "singleQuote": true,
+    "semi": false
   },
   "eslintConfig": {
     "root": true,
@@ -70,11 +70,11 @@
       ],
       "quotes": [
         "warn",
-        "double"
+        "single"
       ],
       "semi": [
         2,
-        "always"
+        "never"
       ]
     },
     "parserOptions": {
