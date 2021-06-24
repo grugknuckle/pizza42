@@ -11,16 +11,16 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLink, faUser, faPowerOff } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { domain, clientId, audience } from '../auth_config.json'
+// import { domain, clientId, audience } from '../auth_config.json'
 
 Vue.config.productionTip = false
 
 Vue.use(hljs.vuePlugin)
 
 Vue.use(Auth0Plugin, {
-  domain,
-  clientId,
-  audience,
+  domain: process.env.VUE_APP_AUTH0_DOMAIN,
+  clientId: process.env.VUE_APP_AUTH0_CLIENTID,
+  audience: process.env.VUE_APP_AUTH0_AUDIENCE,
   onRedirectCallback: appState => {
     router.push(
       appState && appState.targetUrl
