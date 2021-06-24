@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "npm-run-all --parallel serve-vue backend-prod",
     "serve-vue": "vue-cli-service serve",
     "serve": "npm-run-all --parallel serve-vue backend-dev",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "backend-dev": "nodemon bin/www"
+    "backend-dev": "nodemon bin/www",
+    "backend-prod": "node bin/www"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.13.5",
