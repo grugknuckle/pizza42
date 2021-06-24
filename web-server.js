@@ -5,12 +5,12 @@ const helmet = require('helmet')
 const jwt = require('express-jwt')
 const jwksRsa = require('jwks-rsa')
 const { join } = require('path')
-const authConfig = require('./auth_config.json')
+const authConfig = require('./auth_config.js')
 
 const app = express()
 
 if (!authConfig.domain || !authConfig.audience) {
-  throw 'Please make sure that auth_config.json is in place and populated'
+  throw 'Please make sure that auth_config.js is in place and populated'
 }
 
 app.use(morgan('dev'))
