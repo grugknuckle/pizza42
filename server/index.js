@@ -20,13 +20,8 @@ if (!domain || !audience) {
   throw 'The environment variables are not set properly !'
 }
 
-// app.get('/api/external', checkJWT, (req, res) => {
-//   res.send({
-//     msg: 'Your access token was successfully validated!'
-//   })
-// })
-
 app.use('/api/external', checkJWT, require('./routes/external'))
+app.use('/api/v1/pizza', checkJWT, require('./routes/pizza'))
 
 if (process.env.NODE_ENV === 'production') {
   app.use((_, res) => {
