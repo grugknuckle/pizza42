@@ -1,15 +1,19 @@
 {
-  "name": "02-calling-an-api",
+  "name": "pizza-pizza",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "npm-run-all --parallel serve-vue backend-prod",
-    "serve-vue": "vue-cli-service serve",
-    "serve": "npm-run-all --parallel serve-vue backend-dev",
+    "start": "node startup",
+    "serve": "vue-cli-service serve",
+    "dev": "npm-run-all --parallel serve backend-dev",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "backend-dev": "nodemon bin/www",
-    "backend-prod": "node bin/www"
+    "backend-dev": "nodemon startup",
+    "postinstall": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grugknuckle/pizza42"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.13.5",
@@ -17,7 +21,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/vue-fontawesome": "^0.1.10",
     "axios": "^0.21.1",
-    "chalk": "^2.4.2",
     "core-js": "2.6.9",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -27,6 +30,7 @@
     "highlight.js": "^10.4.1",
     "jwks-rsa": "^1.11.0",
     "morgan": "^1.10.0",
+    "serve-static": "^1.14.1",
     "vue": "^2.6.12",
     "vue-router": "^3.4.9",
     "vuex": "^3.6.0"
