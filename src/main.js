@@ -8,10 +8,6 @@ import hljs from 'highlight.js/lib/core'
 import 'highlight.js/styles/github.css'
 import vuetify from './plugins/vuetify'
 
-// import { library } from '@fortawesome/fontawesome-svg-core'
-// import { faLink, faUser, faPowerOff } from '@fortawesome/free-solid-svg-icons'
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
 Vue.config.productionTip = false
 
 Vue.use(hljs.vuePlugin)
@@ -30,10 +26,6 @@ Vue.use(Auth0Plugin, {
 })
 
 Vue.use(Axios)
-
-// library.add(faLink, faUser, faPowerOff)
-
-// Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 new Vue({
   router,
