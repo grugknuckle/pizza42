@@ -7,9 +7,9 @@ import { Auth0Plugin } from './auth'
 import hljs from 'highlight.js/lib/core'
 import 'highlight.js/styles/github.css'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faLink, faUser, faPowerOff } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+// import { library } from '@fortawesome/fontawesome-svg-core'
+// import { faLink, faUser, faPowerOff } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.config.productionTip = false
 
@@ -30,9 +30,9 @@ Vue.use(Auth0Plugin, {
 
 Vue.use(Axios)
 
-library.add(faLink, faUser, faPowerOff)
+// library.add(faLink, faUser, faPowerOff)
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+// Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 new Vue({
   router,
