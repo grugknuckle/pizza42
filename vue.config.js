@@ -14,5 +14,8 @@ module.exports = {
         jQuery: 'jquery'
       })
     ]
-  }
+  },
+  transpileDependencies: [
+    'vuetify'
+  ]
 }

@@ -6,6 +6,7 @@ import { Auth0Plugin } from './auth'
 
 import hljs from 'highlight.js/lib/core'
 import 'highlight.js/styles/github.css'
+import vuetify from './plugins/vuetify'
 
 // import { library } from '@fortawesome/fontawesome-svg-core'
 // import { faLink, faUser, faPowerOff } from '@fortawesome/free-solid-svg-icons'
@@ -36,5 +37,6 @@ Vue.use(Axios)
 
 new Vue({
   router,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')
