@@ -2,6 +2,10 @@
   "name": "pizza-pizza",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grugknuckle/pizza42"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -13,15 +17,12 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.13.5",
-    "@fortawesome/fontawesome-svg-core": "^1.2.32",
-    "@fortawesome/free-solid-svg-icons": "^5.15.1",
-    "@fortawesome/vue-fontawesome": "^0.1.10",
     "axios": "^0.21.1",
     "core-js": "2.6.9",
     "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
+    "express-jwt-authz": "^2.4.1",
     "helmet": "^3.23.3",
     "highlight.js": "^10.4.1",
     "jwks-rsa": "^1.11.0",
@@ -38,6 +39,7 @@
     "@vue/cli-service": "^4.5.9",
     "@vue/eslint-config-prettier": "^3.0.5",
     "babel-eslint": "^10.1.0",
+    "dotenv": "^10.0.0",
     "eslint-plugin-vue": "^5.2.3",
     "node-sass": "^4.14.1",
     "nodemon": "^1.19.4",
@@ -47,6 +49,10 @@
     "vue-cli-plugin-vuetify": "~2.4.1",
     "vue-template-compiler": "^2.6.12",
     "vuetify-loader": "^1.7.0"
+  },
+  "engines": {
+    "node": "^14.15.4",
+    "npm": "^6.14.10"
   },
   "eslintConfig": {
     "root": true,
@@ -87,9 +93,5 @@
   "prettier": {
     "singleQuote": true,
     "semi": false
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/grugknuckle/pizza42"
-  }
+  }  
 }
