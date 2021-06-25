@@ -3,17 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node startup",
     "serve": "vue-cli-service serve",
-    "dev": "npm-run-all --parallel serve backend-dev",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "backend-dev": "nodemon startup",
-    "postinstall": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/grugknuckle/pizza42"
+    "dev": "npm-run-all --parallel serve backend-dev",
+    "postinstall": "npm run build",
+    "start": "node startup"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.13.5",
@@ -33,6 +29,7 @@
     "serve-static": "^1.14.1",
     "vue": "^2.6.12",
     "vue-router": "^3.4.9",
+    "vuetify": "^2.4.0",
     "vuex": "^3.6.0"
   },
   "devDependencies": {
@@ -45,12 +42,11 @@
     "node-sass": "^4.14.1",
     "nodemon": "^1.19.4",
     "npm-run-all": "^4.1.5",
-    "sass-loader": "^7.3.1",
-    "vue-template-compiler": "^2.6.12"
-  },
-  "prettier": {
-    "singleQuote": true,
-    "semi": false
+    "sass": "~1.32.0",
+    "sass-loader": "^10.0.0",
+    "vue-cli-plugin-vuetify": "~2.4.1",
+    "vue-template-compiler": "^2.6.12",
+    "vuetify-loader": "^1.7.0"
   },
   "eslintConfig": {
     "root": true,
@@ -87,5 +83,13 @@
     "parserOptions": {
       "parser": "babel-eslint"
     }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grugknuckle/pizza42"
   }
 }
