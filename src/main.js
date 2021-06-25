@@ -11,8 +11,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLink, faUser, faPowerOff } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-// import { domain, clientId, audience } from '../auth_config.json'
-
 Vue.config.productionTip = false
 
 Vue.use(hljs.vuePlugin)
