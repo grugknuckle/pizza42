@@ -13,7 +13,7 @@
     "backend-dev": "nodemon startup",
     "dev": "npm-run-all --parallel serve backend-dev",
     "postinstall": "npm run build",
-    "start": "node startup"
+    "start": "set NODE_ENV=production&& node startup"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.13.5",
