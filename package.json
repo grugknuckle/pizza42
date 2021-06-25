@@ -10,10 +10,10 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "backend-dev": "nodemon startup",
+    "backend-dev": "nodemon startup dev",
     "dev": "npm-run-all --parallel serve backend-dev",
     "postinstall": "npm run build",
-    "start": "set NODE_ENV=production&& node startup"
+    "start": "node startup.js local"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.13.5",
