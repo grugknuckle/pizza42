@@ -10,7 +10,7 @@ switch(mode) {
     process.env.PORT = 3001
     process.env.NODE_ENV = 'development'
     console.warn('Config loaded from local .env')
-    break;
+    break
   case 'local':
     require('dotenv').config()
     process.env.PORT = 3000
