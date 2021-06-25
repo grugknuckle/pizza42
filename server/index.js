@@ -1,33 +1,37 @@
+
+
 const express = require('express')
 const morgan = require('morgan')
+const serveStatic = require('serve-static')
 const cors = require('cors')
 const helmet = require('helmet')
 const jwt = require('express-jwt')
 const jwksRsa = require('jwks-rsa')
 const { join } = require('path')
-const authConfig = require('./auth_config.js')
 
 const app = express()
-
-if (!authConfig.domain || !authConfig.audience) {
-  throw 'Please make sure that auth_config.js is in place and populated'
-}
 
 app.use(morgan('dev'))
 app.use(helmet())
 app.use(cors())
-app.use(express.static(join(__dirname, 'dist')))
+app.use(serveStatic(join(__dirname, '../dist')))
+
+const domain = process.env.VUE_APP_AUTH0_DOMAIN
+const audience = process.env.VUE_APP_AUTH0_AUDIENCE
+
+if (!domain || !audience) {
+  throw 'The environment variables are not set properly !'
+}
 
 const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`
+    jwksUri: `https://${domain}/.well-known/jwks.json`
   }),
-
-  audience: authConfig.audience,
-  issuer: `https://${authConfig.domain}/`,
+  audience: audience,
+  issuer: `https://${domain}/`,
   algorithms: ['RS256']
 })
 
