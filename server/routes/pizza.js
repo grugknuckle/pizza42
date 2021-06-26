@@ -4,50 +4,22 @@ const router = require('express').Router()
 //   customScopeKey: 'permissions'
 // }
 
-var database = {
-  orders: {}
-} // a fake database
-
 module.exports = router
 
-router.route('/orders/:id')
-  .get((req, res, next) => {
-    // get an existing order by id and customer
-    const order = database.orders[req.params.id]
-    const status = order ? 404 : 200
-    const data = status == 200 ? order : {
-      message: `order ${req.params.id} not found`
-    }
-    res.status(status).json(data)
-  })
-  .put((req, res, next) => {
-    // update an existing order
-    const order = database.orders[req.params.id]
-    if (!order) {
-      const data = {
-        message: `order ${req.params.id} not found`
-      }
-      return res.status(404).json(data)
-    }
-    
-    database.orders[req.params.id] = req.body
-    res.status(200).json(req.body)
-  })
-  .delete((req, res, next) => {
-    // cancel an existing order
-  
-  })
-
 router.route('/orders')
-// .all(checkJWTScopes([ 'read:quotes' ], options))
-  .all((req, res, next) => {
-    // make sure email is verified
-  })
+// .all(checkJWTScopes([ 'fetch:orders' ], options))
   .get((req, res, next) => {
     // get list of orders for this customer
-
+    res.status(200).json({
+      message: 'This should fetch a list of orders.'
+    })
   })
-  .put((req, res, next) => {
+  .post((req, res, next) => {
     // create a new order for this customer
+    console.warn('request body', req.body)
 
+    res.status(201).json({
+      message: 'Order received.',
+      order: req.body
+    })
   })
