@@ -1,12 +1,11 @@
 function enforceHTTPS(req, res, next) {
-  var schema = req.headers['x-forwarded-proto']
-  if (schema === 'https') {
-    // Already https; don't do anything special.
+  const scheme = req.headers['x-forwarded-proto']
+  const host = req.headers.host
+  const url = req.url
+  if (scheme !== 'https') {
+    res.redirect(`https://${host}${url}`)
+  } else {
     next()
-  }
-  else {
-    // Redirect to https.
-    res.redirect('https://' + req.headers.host + req.url)
   }
 }
 
