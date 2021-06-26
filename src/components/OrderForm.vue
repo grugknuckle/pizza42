@@ -9,7 +9,7 @@
         
         <v-card-text>
           <p>What size would you like?</p>
-          <v-radio-group v-model="size.value" row>
+          <v-radio-group v-model="size.value" :color="color" row>
               <v-radio v-for="option in size.options" :key="option.size" :label="option.size" :value="option.size"></v-radio>
           </v-radio-group>
 
@@ -20,7 +20,7 @@
                       v-model="toppings.selected"
                       :key="topping"
                       :label="topping"
-                      color="red"
+                      :color="color"
                       :value="topping">
           </v-checkbox>
         </v-card-text>
@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       dialog: false,
-      apiMessage: null,
+      color: 'red',
       size: {
         value: 'Single Slice',
         options: [
@@ -107,14 +107,17 @@ export default {
     },
     async postOrder() {
       const accessToken = await this.$auth.getTokenSilently()
-      const url = '/api/v1/pizza/orders'
-      const headers = {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
+      const options = {
+        method: 'POST',
+        url: '/api/v1/pizza/orders',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        data: this.orderDetail
       }
-      const body = this.orderDetail
-      return await this.$http.post(url, body, { headers })
+      return await this.$http.request(options)
     }
   }
 }
