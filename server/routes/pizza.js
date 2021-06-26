@@ -16,8 +16,6 @@ router.route('/orders')
   })
   .post((req, res, next) => {
     // create a new order for this customer
-    console.warn('request body', req.body)
-
     res.status(201).json({
       message: 'Order received.',
       order: req.body
