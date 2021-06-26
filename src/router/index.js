@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Meta from 'vue-meta'
 import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
 import ExternalApi from '../views/ExternalApi.vue'
 import { authGuard } from '../auth'
 
+Vue.use(Meta)
 Vue.use(Router)
 
 const router = new Router({
