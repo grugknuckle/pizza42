@@ -96,7 +96,7 @@ export default {
     async submit() {
       try {
         const response = await this.postOrder()
-        const apiMessage = `Error: the server responded with '${response.status}: ${response.statusText}'`
+        const apiMessage = `Success: the server responded with '${response.status}: ${response.statusText}'`
         console.warn(apiMessage, response.data)
       } catch (error) {
         const apiMessage = `Error: the server responded with '${error.response.status}: ${error.response.statusText}'`
