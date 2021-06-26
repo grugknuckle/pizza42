@@ -15,6 +15,7 @@ const ENVIRON = process.env.NODE_ENV
 app.use(morgan('dev'))
 app.use(helmet())
 app.use(cors())
+app.use(express.json())
 app.use(serveStatic(join(__dirname, '../dist')))
 
 app.use('/api/external', checkJWT, require('./routes/external'))
