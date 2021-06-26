@@ -8,15 +8,20 @@
         </v-card-title>
         
         <v-card-text>
+          <p>What size would you like?</p>
+          <v-radio-group v-model="size.value" row>
+              <v-radio v-for="option in size.options" :key="option.size" :label="option.size" :value="option.size"></v-radio>
+          </v-radio-group>
+
           <p>
             Choose your toppings
           </p>
-          <v-checkbox v-for="topping of Object.keys(toppings)"
-                      v-model="toppings[topping]"
+          <v-checkbox v-for="topping of toppings.options"
+                      v-model="toppings.selected"
                       :key="topping"
                       :label="topping"
                       color="red"
-                      :value="toppings[topping]">
+                      :value="topping">
           </v-checkbox>
         </v-card-text>
 
@@ -35,26 +40,53 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'OrderForm',
   data() {
     return {
       dialog: false,
       apiMessage: null,
+      size: {
+        value: 'Single Slice',
+        options: [
+          { size: 'Single Slice', price: 2 },
+          { size: 'Small', price: 7.5 },
+          { size: 'Medium', price: 12 },
+          { size: 'Large', price: 17 },
+          { size: 'X-Large', price: 22 },
+        ]
+      },
       toppings: {
-        pepperoni: false,
-        sausage: false,
-        mushrooms: false,
-        'extra cheese': false,
-        ham:  false,
-        brocolli:  false,
-        'feta cheese':  false,
-        pinapple: false
+        selected: [],
+        options: [
+          'pepperoni',
+          'sausage',
+          'mushrooms',
+          'extra cheese',
+          'ham',
+          'brocolli',
+          'feta cheese',
+          'pinapple'
+        ]
       }
     }
   },
-  props: {
+  computed: {
+    orderDetail() {
+      let price = 0
+      const size = this.size.options.find(x => x.size === this.size.value)
+      price += size.price
+      price += this.toppings.selected.length
 
+      const detail = {
+        size: this.size.value,
+        toppings: this.toppings.selected,
+        price
+      }
+      return detail
+    }
   },
   methods: {
     show() {
@@ -67,18 +99,20 @@ export default {
       const accessToken = await this.$auth.getTokenSilently()
       const url = '/api/v1/pizza/orders'
       const headers = {
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
       }
-      const body = {
-        pizza: this.toppings
-      }
+      const body = this.orderDetail
+      console.warn(body)
       try {
-        const { data } = await this.$http.post(url, { headers }, body)
-        this.apiMessage = data
+        const response = await axios.post(url, body, { headers })
+        console.warn(response.status, response.data)
       } catch (error) {
         this.apiMessage = `Error: the server responded with '${error.response.status}: ${error.response.statusText}'`
+      } finally {
+        this.dialog = false
       }
-      this.dialog = false
     }
   }
 }

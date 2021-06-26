@@ -19,13 +19,17 @@
 
       <v-system-bar></v-system-bar>
       <v-list v-if="$auth.isAuthenticated">
-        <v-list-item>
+        <!-- <v-list-item>
           <v-list-item-avatar>
             <v-img :src="$auth.user.picture"></v-img>
           </v-list-item-avatar>
-        </v-list-item>
+        </v-list-item> -->
 
         <v-list-item link>
+          <v-list-item-avatar>
+            <v-img :src="$auth.user.picture"></v-img>
+          </v-list-item-avatar>
+          
           <v-list-item-content>
             <v-list-item-title class="text-h6">
               {{ $auth.user.name }}
@@ -38,7 +42,7 @@
           </v-list-item-content>
 
           <v-list-item-action>
-            <v-icon>mdi-menu-down</v-icon>
+            <v-icon>{{ icons.mdiMenuDown}}</v-icon>
           </v-list-item-action>
         </v-list-item>
       </v-list>
@@ -75,6 +79,7 @@
 <script>
 import {
 	mdiAccount,
+  mdiMenuDown,
 	mdiLogoutVariant,
 	mdiLoginVariant,
 	mdiAccountCircle
@@ -86,6 +91,7 @@ export default {
     logo: require('../assets/Pizza42.svg'),
     icons: {
       mdiAccount,
+      mdiMenuDown,
       mdiLogoutVariant,
       mdiLoginVariant,
       mdiAccountCircle
