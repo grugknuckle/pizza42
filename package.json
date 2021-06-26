@@ -18,6 +18,7 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.13.5",
     "@mdi/js": "^5.9.55",
+    "auth0": "^2.35.1",
     "axios": "^0.21.1",
     "core-js": "2.6.9",
     "cors": "^2.8.5",
