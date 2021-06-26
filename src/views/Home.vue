@@ -37,7 +37,7 @@
 
                   <v-list-item-icon>
                     <v-chip color="green" outlined pill>
-                      {{ item.price }}
+                      ${{ item.price.toLocaleString('en-US', { minimumFractionDigits: 2 }) }}
                     </v-chip>
                   </v-list-item-icon>
                 </v-list-item>
@@ -104,11 +104,11 @@ export default {
     return {
       src: require('../assets/Pizza-Background.jpg'),
       menu: [
-        { size: 'Single Slice', price: '$2.00' },
-        { size: 'Small', price: '$7.50' },
-        { size: 'Medium', price: '$12.00' },
-        { size: 'Large', price: '$17.00' },
-        { size: 'X-Large', price: '$22.00' },
+        { size: 'Single Slice', price: 2 },
+        { size: 'Small', price: 7.5 },
+        { size: 'Medium', price: 12 },
+        { size: 'Large', price: 17 },
+        { size: 'X-Large', price: 22 },
       ],
       toppings: [
         { name: 'pepperoni', price: '+ $1.00' },
@@ -131,11 +131,11 @@ export default {
   methods: {
     async placeOrder() {
       if (!this.$auth.isAuthenticated) {
-        this.snackbar.title = `User Not Logged In`
-        this.snackbar.text = `Please Login before placing an order.`
+        this.snackbar.title = 'User Not Logged In'
+        this.snackbar.text = 'Please Login before placing an order.'
         this.snackbar.show = true
       } else if (!this.$auth.user.email_verified) {
-        this.snackbar.title = `Email Address Not Verified`
+        this.snackbar.title = 'Email Address Not Verified'
         this.snackbar.text = `The account for ${this.$auth.user.email} recieved an email from the identity provider but the address has not yet been verified. Please follow the instructions in that email to verify the email address.`
         this.snackbar.show = true
       } else {
