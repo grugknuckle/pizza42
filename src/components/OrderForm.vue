@@ -40,8 +40,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'OrderForm',
   data() {
@@ -96,6 +94,18 @@ export default {
       this.dialog = false
     },
     async submit() {
+      try {
+        const response = await this.postOrder()
+        const apiMessage = `Error: the server responded with '${error.response.status}: ${error.response.statusText}'`
+        console.warn(apiMessage, response.data)
+      } catch (error) {
+        const apiMessage = `Error: the server responded with '${error.response.status}: ${error.response.statusText}'`
+        console.error(apiMessage, error)
+      } finally {
+        this.dialog = false
+      }
+    },
+    async postOrder() {
       const accessToken = await this.$auth.getTokenSilently()
       const url = '/api/v1/pizza/orders'
       const headers = {
@@ -104,15 +114,7 @@ export default {
         Accept: 'application/json'
       }
       const body = this.orderDetail
-      console.warn(body)
-      try {
-        const response = await axios.post(url, body, { headers })
-        console.warn(response.status, response.data)
-      } catch (error) {
-        this.apiMessage = `Error: the server responded with '${error.response.status}: ${error.response.statusText}'`
-      } finally {
-        this.dialog = false
-      }
+      return await this.$http.post(url, body, { headers })
     }
   }
 }
