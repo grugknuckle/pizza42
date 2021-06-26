@@ -21,7 +21,7 @@ app.use(cors())
 app.use(express.json())
 app.use(serveStatic(join(__dirname, '../dist')))
 
-// app.use('/api/external', require('./routes/external'))
+app.use('/api/external', require('./routes/external'))
 app.use('/api/v1/pizza', require('./routes/pizza'))
 
 if (ENVIRON === 'production') {
