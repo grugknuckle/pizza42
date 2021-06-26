@@ -12,6 +12,10 @@ const enforceHTTPS = require('./middleware/enforceHTTPS')
 const app = express()
 const ENVIRON = process.env.NODE_ENV
 
+if(ENVIRON === 'production') {
+  app.use(enforceHTTPS)
+}
+
 app.use(morgan('dev'))
 app.use(helmet())
 app.use(cors())
@@ -22,7 +26,6 @@ app.use('/api/external', checkJWT, require('./routes/external'))
 app.use('/api/v1/pizza', checkJWT, require('./routes/pizza'))
 
 if (ENVIRON === 'production') {
-  app.use(enforceHTTPS)
   app.use((_, res) => {
     res.sendFile(join(__dirname, 'dist', 'index.html'))
   })
