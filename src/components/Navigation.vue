@@ -29,7 +29,7 @@
           <v-list-item-avatar>
             <v-img :src="$auth.user.picture"></v-img>
           </v-list-item-avatar>
-          
+
           <v-list-item-content>
             <v-list-item-title class="text-h6">
               {{ $auth.user.name }}
@@ -50,6 +50,16 @@
       <v-divider></v-divider>
 
 			<v-list dense nav>
+
+        <v-list-item to="/">
+          <v-list-item-icon>
+            <v-icon>{{ icons.mdiSilverware }}</v-icon>
+					</v-list-item-icon>
+
+					<v-list-item-content>
+						<v-list-item-title>Menu</v-list-item-title>
+					</v-list-item-content>
+        </v-list-item>
 
         <v-list-item v-if="$auth.isAuthenticated" to="/profile">
           <v-list-item-icon>
@@ -80,6 +90,7 @@
 import {
 	mdiAccount,
   mdiMenuDown,
+  mdiSilverware,
 	mdiLogoutVariant,
 	mdiLoginVariant,
 	mdiAccountCircle
@@ -92,6 +103,7 @@ export default {
     icons: {
       mdiAccount,
       mdiMenuDown,
+      mdiSilverware,
       mdiLogoutVariant,
       mdiLoginVariant,
       mdiAccountCircle
