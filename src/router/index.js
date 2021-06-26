@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Meta from 'vue-meta'
 import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
-import ExternalApi from '../views/ExternalApi.vue'
+// import ExternalApi from '../views/ExternalApi.vue'
 import { authGuard } from '../auth'
 
 Vue.use(Meta)
@@ -24,11 +24,11 @@ const router = new Router({
       component: Profile,
       beforeEnter: authGuard
     },
-    {
-      path: '/external-api',
-      component: ExternalApi,
-      beforeEnter: authGuard
-    }
+    // {
+    //   path: '/external-api',
+    //   component: ExternalApi,
+    //   beforeEnter: authGuard
+    // }
   ]
 })
 

@@ -6,7 +6,6 @@ const helmet = require('helmet')
 const { join } = require('path')
 
 // middlewares
-const checkJWT = require('./middleware/checkJWT')
 const enforceHTTPS = require('./middleware/enforceHTTPS')
 
 const app = express()
@@ -22,8 +21,8 @@ app.use(cors())
 app.use(express.json())
 app.use(serveStatic(join(__dirname, '../dist')))
 
-app.use('/api/external', checkJWT, require('./routes/external'))
-app.use('/api/v1/pizza', checkJWT, require('./routes/pizza'))
+// app.use('/api/external', require('./routes/external'))
+app.use('/api/v1/pizza', require('./routes/pizza'))
 
 if (ENVIRON === 'production') {
   app.use((_, res) => {

@@ -1,11 +1,10 @@
 const router = require('express').Router()
+const { getExternalAPI } = require('./../controllers/external')
+// middlewares
+const checkJWT = require('./../middleware/checkJWT')
 
 module.exports = router
 
 router.route('/')
-  .get((req, res) => {
-    const data = {
-      msg: 'Your access token was successfully validated!'
-    }
-    res.status(200).send(data)
-  })
+  .all(checkJWT)
+  .get(getExternalAPI)
