@@ -4,7 +4,11 @@
 
 			<v-main>
         <error />
-        <router-view></router-view>
+        <v-card elevation="2" outlined shaped class="ma-2">
+          <v-img :src="src">
+            <router-view></router-view>
+          </v-img>
+        </v-card>
 			</v-main>
 		
 		<!-- <app-footer></app-footer> -->
@@ -19,6 +23,11 @@ import Navigation from './components/Navigation'
 export default {
   metaInfo: {
     titleTemplate: 'Pizza 42 - %s'
+  },
+  data() {
+    return {
+      src: require('./assets/Pizza-Background.jpg')
+    }
   },
   components: {
     Error,
