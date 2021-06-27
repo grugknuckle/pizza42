@@ -56,7 +56,10 @@ export const useAuth0 = ({
         }
       },
       loginWithRedirect(o) {
-        return this.auth0Client.loginWithRedirect(o)
+        const scope = 'openid profile email read:orders create:orders' 
+        const options = Object.assign(typeof o == 'object' ? o : {}, { scope })
+        console.warn(options)
+        return this.auth0Client.loginWithRedirect(options)
       },
       getIdTokenClaims(o) {
         return this.auth0Client.getIdTokenClaims(o)
