@@ -98,6 +98,13 @@ export default {
         const response = await this.postOrder()
         const apiMessage = `Success: the server responded with '${response.status}: ${response.statusText}'`
         console.warn(apiMessage, response.data)
+        
+        // emit event to send data back to parent for rendering
+        const pizza = {
+          item: `${this.size.value} ${this.toppings.selected.length > 0 ? '+ ' + this.toppings.selected.join(', ') : '' }`,
+          price: `$${this.orderDetail.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}`      
+        }
+        this.$emit('submit-pizza-order', pizza)
       } catch (error) {
         const apiMessage = `Error: the server responded with '${error.response.status}: ${error.response.statusText}'`
         console.error(apiMessage, error)
@@ -107,6 +114,7 @@ export default {
     },
     async postOrder() {
       const accessToken = await this.$auth.getTokenSilently()
+      // console.warn(accessToken)
       const options = {
         method: 'POST',
         url: '/api/v1/pizza/orders',
