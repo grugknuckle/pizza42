@@ -31,7 +31,7 @@ async function createOrder(req, res, next) {
     let metadata = await management.getUser({ id }).then(user => user.metadata || {})
     
     // set the order history in app_metadata, namespaced by the pizza app url
-    let namespacedata = metadata.pizza4242 ?? { orders: [] }
+    let namespacedata = metadata.pizza4242 ?? { roles: ['customer'], orders: [] }
     namespacedata.orders.push(order)
     metadata.pizza4242 = namespacedata
 
