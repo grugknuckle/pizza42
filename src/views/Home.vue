@@ -1,72 +1,87 @@
 <template>
 <div>
-  <v-card elevation="2" outlined shaped class="ma-2">
-    <v-img :src="src">
+  
+  <v-row>
+    <!-- Menu Column -->
+    <v-col cols="5">
+      <v-card elevation="2" outlined shaped class="ma-3 pa-3">        
+        <v-card-title>Menu</v-card-title>
+        <v-list subheader dense>
+          <v-subheader>Sizes</v-subheader>
 
-      <v-row>
-          <v-col cols="6" offset-md="6">
-            <!-- Place Order Card -->
-            <v-card v-if="$auth.isAuthenticated" elevation="2" outlined shaped class="ma-5">
-              <v-card-title>
-                Welcome {{ $auth.user.name }} !
-              </v-card-title>
-              <v-list subheader dense>
-                
+          <v-list-item v-for="item in menu" :key="item.size" >
 
-              </v-list>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.size"></v-list-item-title>
+            </v-list-item-content>
 
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn outlined color="red" @click="placeOrder()">
-                  Order Pizza !
-                </v-btn>
-              </v-card-actions>
-            </v-card>
+            <v-list-item-icon>
+              <v-chip color="green" outlined pill>
+                ${{ item.price.toLocaleString('en-US', { minimumFractionDigits: 2 }) }}
+              </v-chip>
+            </v-list-item-icon>
+          </v-list-item>
 
-            <!-- Menu Card -->
-            <v-card elevation="2" outlined shaped class="ma-5">
-              <v-card-title>Menu</v-card-title>
-              <v-list subheader dense>
-                <v-subheader>Sizes</v-subheader>
+          <v-subheader>Toppings</v-subheader>
 
-                <v-list-item v-for="item in menu" :key="item.size" >
+          <v-list-item v-for="topping in toppings" :key="topping.name" >
 
-                  <v-list-item-content>
-                    <v-list-item-title v-text="item.size"></v-list-item-title>
-                  </v-list-item-content>
+            <v-list-item-content>
+              <v-list-item-title v-text="topping.name"></v-list-item-title>
+            </v-list-item-content>
 
-                  <v-list-item-icon>
-                    <v-chip color="green" outlined pill>
-                      ${{ item.price.toLocaleString('en-US', { minimumFractionDigits: 2 }) }}
-                    </v-chip>
-                  </v-list-item-icon>
-                </v-list-item>
+            <v-list-item-icon>
+              <v-chip color="green" outlined pill>
+                {{ topping.price }}
+              </v-chip>
+            </v-list-item-icon>
+          </v-list-item>
 
-                <v-subheader>Toppings</v-subheader>
+        </v-list>
+      </v-card>
+      
+    </v-col>
 
-                <v-list-item v-for="topping in toppings" :key="topping.name" >
+    <!-- Order Column -->
+    <v-col cols="5">
+      <v-card elevation="2" outlined shaped class="ma-3 pa-3" v-if="$auth.isAuthenticated">
+        <v-card-title v-if="$auth.isAuthenticated">
+          Welcome {{ $auth.user.name }} !
+        </v-card-title>
+        
+        <v-divider></v-divider>
+        
+        <v-list subheader dense v-if="pizza">
+          <v-subheader>Your Order:</v-subheader>
 
-                  <v-list-item-content>
-                    <v-list-item-title v-text="topping.name"></v-list-item-title>
-                  </v-list-item-content>
+          <v-list-item>
 
-                  <v-list-item-icon>
-                    <v-chip color="green" outlined pill>
-                      {{ topping.price }}
-                    </v-chip>
-                  </v-list-item-icon>
-                </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title v-text="pizza.item"></v-list-item-title>
+            </v-list-item-content>
 
-              </v-list>
-            </v-card>
-            
-          </v-col>
-        </v-row>
+            <v-list-item-icon>
+              <v-chip color="green" outlined pill>
+                {{ pizza.price.toLocaleString('en-US', { minimumFractionDigits: 2 }) }}
+              </v-chip>
+            </v-list-item-icon>
+          </v-list-item>
 
-    </v-img>
-  </v-card>
+        </v-list>  
+        
+        <v-divider></v-divider>
 
-  <order-form ref="orderform"></order-form>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn outlined color="red" @click="placeOrder()">
+            Select Pizza
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-col>
+  </v-row>
+
+  <order-form ref="orderform" v-on:submit-pizza-order="updatePizza"></order-form>
   <v-snackbar
     v-model="snackbar.show"
     :timeout="10000"
@@ -102,7 +117,7 @@ export default {
   },
   data() {
     return {
-      src: require('../assets/Pizza-Background.jpg'),
+      pizza: null,
       menu: [
         { size: 'Single Slice', price: 2 },
         { size: 'Small', price: 7.5 },
@@ -143,6 +158,9 @@ export default {
         this.$refs.orderform.show()
       }
     },
+    updatePizza(pizza) {
+      this.pizza = pizza
+    }
   }
 }
 </script>
