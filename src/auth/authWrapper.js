@@ -68,7 +68,8 @@ export const useAuth0 = ({
         return this.auth0Client.getTokenWithPopup(o)
       },
       logout(o) {
-        return this.auth0Client.logout(o)
+        const options = Object.assign(typeof o == 'object' ? o : {}, { returnTo: process.env.VUE_APP_AUTH0_LOGOUTURL })
+        return this.auth0Client.logout(options)
       }
     },
     async created() {
