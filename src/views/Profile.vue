@@ -79,7 +79,7 @@ export default {
     this.orders = orders.map(x => {
       const orderdate = new Date(x.timestamp)
       return {
-        date: `${orderdate.getDate() + 1}/${orderdate.getMonth() + 1}/${orderdate.getFullYear()}`,
+        date: `${orderdate.getMonth() + 1}/${orderdate.getDate()}/${orderdate.getFullYear()}`,
         item: `${x.size} ${x.toppings.length > 0 ? '+ ' + x.toppings.join(', ') : '' }`,
         price: `$${x.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}`
       }
