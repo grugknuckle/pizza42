@@ -9,5 +9,5 @@ module.exports = router
 
 router.route('/orders')
   .all(checkJWT)
-  .get(controller.listOrders) // canReadOrders
-  .post(controller.createOrder) // canCreateOrders
+  .get(canReadOrders, controller.listOrders) // canReadOrders
+  .post(canCreateOrders, controller.createOrder) // canCreateOrders
