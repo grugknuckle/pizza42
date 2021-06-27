@@ -29,13 +29,17 @@ async function createOrder(req, res, next) {
   
   try {
     let metadata = await management.getUser({ id }).then(user => user.metadata || {})
-    let orders = metadata.orders ?? []
-    orders.push(order)
-    metadata.orders = orders
-    const update = await management.updateUserMetadata({ id }, metadata)
+    
+    // set the order history in app_metadata, namespaced by the pizza app url
+    let namespacedata = metadata.pizza4242 ?? { orders: [] }
+    namespacedata.orders.push(order)
+    metadata.pizza4242 = namespacedata
+
+    // update the app_metadata
+    const update = await management.updateAppMetadata({ id }, metadata)
     res.status(201).json({ message: 'Order received.', order, update })
   } catch (error) {
-    res.status(500).json({ message: `Error: ${error.message}`, stack: error.stack ?? [] }) 
+    res.status(error.status ?? 500).json({ message: `Error: ${error.message}`, stack: error.stack ?? [] }) 
   }
 }
 
