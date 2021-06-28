@@ -55,23 +55,19 @@ export const useAuth0 = ({
           this.loading = false
         }
       },
-      loginWithRedirect(o) {
-        const scope = 'openid profile email read:orders create:orders' 
-        const options = Object.assign(typeof o == 'object' ? o : {}, { scope })
-        console.warn(options)
+      loginWithRedirect(options) {
         return this.auth0Client.loginWithRedirect(options)
       },
-      getIdTokenClaims(o) {
-        return this.auth0Client.getIdTokenClaims(o)
+      getIdTokenClaims(options) {
+        return this.auth0Client.getIdTokenClaims(options)
       },
-      getTokenSilently(o) {
-        return this.auth0Client.getTokenSilently(o)
+      getTokenSilently(options) {
+        return this.auth0Client.getTokenSilently(options)
       },
-      getTokenWithPopup(o) {
-        return this.auth0Client.getTokenWithPopup(o)
+      getTokenWithPopup(options) {
+        return this.auth0Client.getTokenWithPopup(options)
       },
-      logout(o) {
-        const options = Object.assign(typeof o == 'object' ? o : {}, { returnTo: process.env.VUE_APP_AUTH0_LOGOUTURL })
+      logout(options) {
         return this.auth0Client.logout(options)
       }
     },

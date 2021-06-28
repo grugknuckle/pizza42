@@ -112,10 +112,10 @@ export default {
 	methods: {
 		// https://auth0.com/blog/complete-guide-to-vue-user-authentication/#Add-User-Authentication
     login() {
-      this.$auth.loginWithRedirect()
+      this.$auth.loginWithRedirect({ scope: 'openid profile email read:orders create:orders' })
     },
     logout() {
-      this.$auth.logout()
+      this.$auth.logout({ returnTo: process.env.VUE_APP_AUTH0_LOGOUTURL })
       this.$router.push({ path: '/' })
     }
 	}
