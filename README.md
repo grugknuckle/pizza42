@@ -1,85 +1,88 @@
-# Scenario #2 - Calling an External API
 
-For this scenario, an API endpoint `/api/external` has been included in the Express server that requires a bearer token to be supplied as a bearer token in the `Authorization` header (as provided during the authentication flow). This uses the [`express-jwt`](https://github.com/auth0/express-jwt) middleware to validate the token against the identifier of your API as set up in the Auth0 dashboard, as well as checking that the signature is valid.
+# Auth0 - Solutions Engineer Technical Challenge
 
-**Note**: This sample has been designed to work with Vue 2, and has not yet been updated to work with Vue 3.
+## Description
 
-## Project setup
+### Use Case
 
-```bash
-npm install
+Pizza 42 is a national pizza delivery chain. Everybody seems to love their pizza, especially developers! They’re in the process of modernizing their online ordering system and have engaged with Auth0 for their identity needs.
+
+Leadership at Pizza 42 understands that managing identity consumes engineering resources
+and doesn’t contribute to their core value proposition - making great pizza. They’ve noted the
+following challenges:
+
+* The security team would like to offload credential management to the identity solution. Securing their infrastructure is complex and storing credentials raises the level of liability
+* The product team would like the identity solution to provide a frictionless and customizable login experience. They would like turnkey password reset functionality to reduce help desk call volume. They would also like to provide customers the option to login with their social login provider.
+* The marketing team would like the identity solution to enrich customer data as users login. Customer data will be used to drive marketing campaigns to deepen their already loyal customer base and appeal to new customers.
+
+### Solution
+
+As a Solutions Engineer, your task is to build a proof of concept (POC) that illustrates how Pizza 42 could solve the use case challenges outlined above. To get started, you may leverage one of the Auth0 quick start solutions found on the Auth0 documentation website.
+
+* Give new customers the option to sign up and existing customers the option to sign in with either email / password or a social identity provider such as Google.
+* Require that a customer have a verified email address before they can place a pizza order. This shouldn’t prevent them from signing into the application.
+* The API endpoint servicing the orders request must require a valid token as well as a specific scope for the operation to complete.
+* After an order is placed, save the order to the user’s Auth0 profile for future reference.
+* Add the order history of a user to their ID token when they login
+
+### Production
+
+This application is currently deployed [here](http://pizza4242.herokuapp.com/).
+
+
+## Environment Variables
+
+The project needs to be configured with your Auth0 domain and client ID in order for the authentication flow to work. Create a new environment file in the root directory. Name it `.env`. Add the following to the file
+
+Add the Auth0 management API credentials.
+```
+  AUTH0_API_AUDIENCE=https://<your-auth0-domain>/api/v2/
+  AUTH0_API_CLIENTID=<your-auth0-management-api-id>
+  AUTH0_API_SECRET=<your-auth0-management-api-non-interactive-secret>
 ```
 
-### Configuration
-
-The project needs to be configured with your Auth0 domain and client ID in order for the authentication flow to work.
-
-To do this, first copy `auth_config.sample.json` into a new file in the same folder called `auth_config.json`, and replace the values within with your own Auth0 application credentials:
-
-```json
-{
-  "domain": "<YOUR AUTH0 DOMAIN>",
-  "audience": "<YOUR AUTH0 API IDENTIFIER>",
-  "clientId": "<YOUR AUTH0 CLIENT ID>"
-}
+Next add the application credentials.
 ```
-
-### Running in development
-
-This compiles and serves the Vue app, and starts the backend API server on port 3001:
-
-```bash
-npm run serve
+  VUE_APP_AUTH0_AUDIENCE=<url-to-your-pizza-42-deployment>/api
+  VUE_APP_AUTH0_CLIENTID=<your-auth0-application-client-id>
+  VUE_APP_AUTH0_DOMAIN=<your-auth0-domain>.us.auth0.com
+  VUE_APP_AUTH0_LOGOUTURL=<url-to-your-pizza-42-deployment>
+  VUE_APP_DOMAIN=<url-to-your-pizza-42-deployment>
 ```
-
 ## Deployment
 
-### Compiles and minifies for production
-
+Clone this repository and cd into the directory
 ```bash
-npm run build
+    git clone https://github.com/grugknuckle/pizza42.git
+    cd pizza42
 ```
 
-### Docker build
-
-To build the Docker image run `exec.sh`, or `exec.ps1` on Windows.
-
-### Run your tests
-
+Install the dependencies
 ```bash
-npm run test
+    npm install
 ```
 
-### Lints and fixes files
-
+Run the project locally in development mode. This mode uses the vue-cli-service to serve the front end application on port 3000, and serves the backend on port 3001.
 ```bash
-npm run lint
+    npm run dev
 ```
 
-## What is Auth0?
+Build the front end application. This command will pack the front end application into the /dist folder to be served statically by the backend server.
+```bash
+    npm run build
+```
 
-Auth0 helps you to:
+Start the application in production mode. This will serve the front end application statically on the same port as the API server.
+```bash
+    npm run start
+```
+  ## Acknowledgements
 
-- Add authentication with [multiple authentication sources](https://docs.auth0.com/identityproviders), either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce, among others**, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
-- Add authentication through more traditional **[username/password databases](https://docs.auth0.com/mysql-connection-tutorial)**.
-- Add support for **[linking different user accounts](https://docs.auth0.com/link-accounts)** with the same user.
-- Support for generating signed [Json Web Tokens](https://docs.auth0.com/jwt) to call your APIs and **flow the user identity** securely.
-- Analytics of how, when and where users are logging in.
-- Pull data from other sources and add it to the user profile, through [JavaScript rules](https://docs.auth0.com/rules).
+This project was based on the [Auth0 Single Page Application Quickstart](https://github.com/auth0-samples/auth0-vue-samples/tree/master/01-Login), and modified for taste.
 
-## Create a Free Auth0 Account
 
-1.  Go to [Auth0](https://auth0.com/signup) and click Sign Up.
-2.  Use Google, GitHub or Microsoft Account to login.
+## Authors
 
-## Issue Reporting
+- [@aaron wolbach](https://www.github.com/grugknuckle)
 
-If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/whitehat) details the procedure for disclosing security issues.
-
-## Author
-
-[Auth0](https://auth0.com)
-
-## License
-
-This project is licensed under the MIT license. See the [LICENSE](../LICENSE) file for more info.
+  
