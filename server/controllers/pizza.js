@@ -1,4 +1,5 @@
 const axios = require('axios')
+// Docs ... https://auth0.github.io/node-auth0/
 const ManagementClient = require('auth0').ManagementClient
 
 const management = new ManagementClient({
@@ -28,8 +29,8 @@ async function createOrder(req, res, next) {
   const order = Object.assign(req.body, { timestamp })
   
   try {
-    let metadata = await management.getUser({ id }).then(user => user.metadata || {})
-    
+    let metadata = await management.getUser({ id }).then(user => user.app_metadata || {})
+    console.warn(metadata)
     // set the order history in app_metadata, namespaced by the pizza app url
     let namespacedata = metadata.pizza4242 ?? { roles: ['customer'], orders: [] }
     namespacedata.orders.push(order)
